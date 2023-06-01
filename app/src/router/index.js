@@ -9,22 +9,28 @@ import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import Search from '@/pages/Search'
 export default new VueRouter({
+    //配置路由
     routes:[
         {
             path:"/home",
-            component: Home
+            component: Home,
+            meta: { show:true }
         },
         {
             path:"/register",
-            component: Register
+            component: Register,
+            meta: { show:false }
         },
         {
-            path:"/search",
-            component: Search
+            path:"/search/:keyWords",
+            component: Search,
+            meta: { show:true },
+            name:"search"
         },
         {
             path:"/login",
-            component: Login
+            component: Login,
+            meta: { show:false}
         },
         //重定向
         {

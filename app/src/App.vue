@@ -3,7 +3,8 @@
     <Header></Header>
     <!--书写路由组件-->
     <router-view></router-view>
-    <Footer></Footer>
+        <!--在Home，Search 显示，在登录，注册不显示-->
+    <Footer v-show="$route.path==='/home' || $route.path==='/search'"></Footer>
   </div>
 </template>
 
