@@ -1,5 +1,5 @@
 <template>
-  <div>我是根组件
+  <div>我是根组件1
 
   </div>
 </template>
