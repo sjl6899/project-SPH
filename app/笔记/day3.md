@@ -1,10 +1,12 @@
 1:重写push与replace方法
 工作的时候想处理掉，不想处理对于你的程序没有任何影响
-function push(){
-    return new Promise(resolve,reject){
 
+    function push(){
+        return new Promise(resolve,reject){
+        
+        }
     }
-}
+
 
 
 2:axios二次封装
