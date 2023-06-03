@@ -67,15 +67,30 @@ JSONP、CROS、代理
 
 
 
-
 4)vuex:今晚务必vuex复习一下
 vuex:Vue官方提供的一个插件，插件可以管理项目共用数据。
 vuex：书写任何项目都需要vuex？
 项目大的时候，需要有一个地方‘统一管理数据’即为仓库store
 Vuex基本使用:
 
-     
-   
+//state:仓库存储数据的地方
+
+const  state={};
+
+//mutation是：修改state的唯一手段
+
+const mutations= {};
+
+//actions:可以书写自己的业务逻辑 也可以处理异步
+
+const actions={};
+
+//getter:可以理解为计算属性，用于简化仓库数据，让组件获取仓库的数据更加方便
+
+const getters={};
+
+​     
+
 
 
 
