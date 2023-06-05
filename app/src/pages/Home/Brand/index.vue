@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "App"
+  name: "Brand"
 };
 </script>
 

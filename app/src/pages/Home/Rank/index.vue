@@ -100,7 +100,7 @@
 
 <script>
 export default {
-  name: "App",
+  name: "Rank",
   components: {},
 };
 </script>

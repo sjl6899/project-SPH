@@ -106,9 +106,7 @@
 <script>
 
 export default {
-  name: 'App',
-  components: {
-  }
+  name: 'ListContainer',
 }
 </script>
 
