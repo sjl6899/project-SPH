@@ -22,7 +22,7 @@ import Floor from '@/pages/Home/Floor';
 import Brand from '@/pages/Home/Brand'
 
 export default {
-  name: 'App',
+  name: 'Home',
   components:{
     ListContainer,
     Recommend,
