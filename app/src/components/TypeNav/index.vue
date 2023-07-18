@@ -6,7 +6,7 @@
       <h2 class="all">全部商品分类</h2>
       <!-- 三级联动 -->
       <div class="sort">
-        <div class="all-sort-list2">
+        <div class="all-sort-list2" @click="goSearch">
           <div
             class="item"
             v-for="(c1, index) in categoryList"
@@ -14,7 +14,7 @@
             :class="{ cur: currentIndex == index }"
           >
             <h3 @mouseenter="changeIndex(index)">
-              <a href="">{{ c1.categoryName }}</a>
+              <a @click="goSearch">{{ c1.categoryName }}</a>
             </h3>
             <!-- 二级 三级 分类 -->
             <div class="item-list clearfix" :style="{display:currentIndex==index?'block':'none'}">
@@ -25,14 +25,14 @@
               >
                 <dl class="fore">
                   <dt>
-                    <a href="">{{ c2.categoryName }}</a>
+                    <a  @click="goSearch">{{ c2.categoryName }}</a>
                   </dt>
                   <dd>
                     <em
                       v-for="(c3) in c2.categoryChild"
                       :key="c3.categoryId"
                     >
-                      <a href="">{{ c3.categoryName }}</a>
+                      <a @click="goSearch">{{ c3.categoryName }}</a>
                     </em>
                   </dd>
                 </dl>
@@ -59,6 +59,10 @@
 
 <script>
 import { mapState } from "vuex";
+//引入方式：是把lodash全部功能函数引入
+//import  _ from 'lodash';
+//最好的引入方式：按需引入
+import throttle from "lodash/throttle"
 export default {
   name: "TypeNav",
   data() {
@@ -82,11 +86,20 @@ export default {
   methods: {
     //鼠标进去修改响应式数据currentIndex index:鼠标移动上的一级分类的元素索引值
     changeIndex(index) {
-      this.currentIndex=index
+      //this.currentIndex=index
     },
+    //加上节流;throttle回调函数别用箭头函数
+    changeIndex:throttle(function(index){
+      this.currentIndex=index
+    },50),
     //一级分类鼠标移出的事件回调
     leaveIndex(){
       this.currentIndex=-1
+    },
+    goSearch(){
+      //最好的解决方案 编程式导航  +  事件委派
+      //利用事件委派存在一些问题：1.点击一定是a标签  2。如何获取参数【1，2，3级商品的类名】
+      this.$router.push('/search')
     }
   },
 };

@@ -4,12 +4,12 @@
       <h1>query参数----{{$route.query.k}}</h1>
     </div>
     
-  </template>
+</template>
   
-  <script>
+<script>
   
-  export default {
-    name: 'App',
+export default {
+    name: 'Search',
     components: {
     }
   }
