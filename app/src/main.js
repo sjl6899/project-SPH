@@ -6,6 +6,8 @@ import TypeNav from '@/components/TypeNav'
 import router from '@/router'
 //引入仓库
 import store from './store';
+//引入swiper样式
+import "swiper/css/swiper.css"
 //第一个参数：全局组件名  第二个参数：哪一个组件
 Vue.component(TypeNav.name,TypeNav);
 
