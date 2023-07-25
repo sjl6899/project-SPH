@@ -11,7 +11,7 @@ import "nprogress/nprogress.css"
 const request=axios.create({
     //配置对象
     //基础路径 发请求的时候，路径中会出现api
-    baseURL:"/api",
+    baseURL:"/mock",
     //发送请求超时
     timeout:5000
 });
