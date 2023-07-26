@@ -5,7 +5,7 @@
       <div class="sortList clearfix">
         <div class="center">
           <!--banner轮播-->
-          <div class="swiper-container" id="mySwiper">
+          <div class="swiper-container" ref="mySwiper">
             <div class="swiper-wrapper">
               <div
                 class="swiper-slide"
@@ -122,7 +122,7 @@ export default {
         //在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
         this.$nextTick(()=>{
         //当你执行这个回调的时候：保证服务器数据回来了，v-for执行完毕了【轮播图结构一定有】
-        var mySwiper = new Swiper(document.querySelector(".swiper-container"), {
+        var mySwiper = new Swiper(this.$refs.mySwiper, {
         loop: true,
         // 如果需要分页器
         pagination: {

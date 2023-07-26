@@ -9,3 +9,6 @@ export const reqCategoryList=()=>request({url:'http://gmall-h5-api.atguigu.cn/ap
 
 //获取banner （Home 首页轮播图接口）
 export const reqGetBannerList=()=>mockRequest({url:'/banner',method:'get'});
+
+//获取floor数据
+export const reqFloorList=()=>mockRequest({url:'/floor',method:'get'});
