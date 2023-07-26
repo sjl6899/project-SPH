@@ -105,8 +105,24 @@ export default {
   mounted() {
     //派发action ：通过Vuex发起ajax请求，将数据存储在仓库当中
     this.$store.dispatch("getBannerList");
-    setTimeout(() => {
-      var mySwiper = new Swiper(document.querySelector(".swiper-container"), {
+  },
+  computed: {
+    ...mapState({
+      bannerList: (state) => state.home.bannerList,
+    }),
+  },
+  watch:{
+    //监听bannerList数据的变化,因为数据发生过变化，由空数组变为有四个元素的数组
+    bannerList:{
+      handler(newValue,oldValue){
+        //现在通过watch监听bannerList属性值的变化
+        //如果执行handler方法，代表组件实例身上这个属性的属性已经有了【数组：四个元素】
+        //当这个函数执行：只能保证bannerList数据已经有了，但是你没办法保证v-for已经执行结束了
+        //v-for执行完毕，才有结构【watch中是无法保证的】
+        //在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
+        this.$nextTick(()=>{
+        //当你执行这个回调的时候：保证服务器数据回来了，v-for执行完毕了【轮播图结构一定有】
+        var mySwiper = new Swiper(document.querySelector(".swiper-container"), {
         loop: true,
         // 如果需要分页器
         pagination: {
@@ -118,13 +134,10 @@ export default {
           prevEl: ".swiper-button-prev",
         },
       });
-    },1000);
-  },
-  computed: {
-    ...mapState({
-      bannerList: (state) => state.home.bannerList,
-    }),
-  },
+        })
+      }
+    }
+  }
 };
 </script>
 
