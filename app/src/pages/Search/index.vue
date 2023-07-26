@@ -3,7 +3,7 @@
     <TypeNav />
     <div class="main">
       <div class="py-container">
-        <!--bread-->
+        <!--bread 面包屑，带有X的结构-->
         <div class="bread">
           <ul class="fl sui-breadcrumb">
             <li>
