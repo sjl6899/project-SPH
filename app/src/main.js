@@ -17,6 +17,9 @@ Vue.config.productionTip = false
 //引入MockServe.js---mock数据
 import '@/mock/mockServe';
 
+// import {reqGetSearchInfo} from '@/api'
+// console.log(reqGetSearchInfo({}));
+
 new Vue({
   render: h => h(App),
   router,
