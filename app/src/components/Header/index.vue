@@ -34,7 +34,7 @@
       <div class="searchArea">
         <form action="###" class="searchForm">
           <input
-            v-model="keyWords"
+            v-model="keyword"
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
@@ -57,7 +57,7 @@ export default {
   name: "Header",
   data() {
     return {
-      keyWords: "",
+      keyword: "",
     };
   },
   methods: {
@@ -96,7 +96,7 @@ export default {
       //如果有query参数 带入
       let location = {
         name: "search",
-        params: { keyWords: this.keyWords || undefined },
+        params: { keyword: this.keyword || undefined },
       };
       if (this.$route.query) {
         location.query = this.$route.query;
@@ -104,6 +104,12 @@ export default {
       }
     },
   },
+  mounted(){
+    //通过全局事件总线清除关键字
+    this.$bus.$on("clear",()=>{
+      this.keyword="";
+    })
+  }
 };
 </script>
 

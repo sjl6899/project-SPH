@@ -17,11 +17,13 @@ Vue.config.productionTip = false
 //引入MockServe.js---mock数据
 import '@/mock/mockServe';
 
-// import {reqGetSearchInfo} from '@/api'
-// console.log(reqGetSearchInfo({}));
 
 new Vue({
   render: h => h(App),
+  //全局事件总线4bus配置
+  beforeCreate(){
+    Vue.prototype.$bus=this;
+  },
   router,
   //注册仓库,组件的实例身上都拥有$Store
   store
