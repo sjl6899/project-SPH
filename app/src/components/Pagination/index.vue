@@ -1,30 +1,86 @@
 <template>
   <div class="pagination">
-    <button>上一页</button>
-    <button>1</button>
-    <button>···</button>
+    <button :disabled="pageNo == 1" @click="$emit('getPageNo', pageNo - 1)">
+      上一页
+    </button>
+    <button
+      v-if="startNumAndEndNum.start > 1"
+      @click="$emit('getPageNo', 1)"
+      :class="{ active: pageNo == 1 }"
+    >
+      1
+    </button>
+    <button v-if="startNumAndEndNum.start > 2">···</button>
+    <!--中间部分  -->
+    <button
+      v-for="(page, index) in startNumAndEndNum.end"
+      :key="index"
+      v-if="page >= startNumAndEndNum.start"
+      @click="$emit('getPageNo', page)"
+      :class="{active:pageNo==page}"
+    >
+      {{ page }}
+    </button>
 
-    <button>3</button>
-    <button>4</button>
-    <button>5</button>
-    <button>6</button>
-    <button>7</button>
+    <button v-if="startNumAndEndNum.end < totalPage - 1">···</button>
+    <button
+      v-if="startNumAndEndNum.end < totalPage"
+      @click="$emit('getPageNo', totalPage)"
+      :class="{active:pageNo==total}"
+    >
+      {{ totalPage }}
+    </button>
+    <button
+      @click="$emit('getPageNo', pageNo + 1)"
+      :disabled="pageNo == totalPage"
+    >
+      下一页
+    </button>
 
-    <button>···</button>
-    <button>9</button>
-    <button>下一页</button>
-
-    <button style="margin-left: 30px">共 60 条</button>
+    <button style="margin-left: 30px">共 {{ total }} 条</button>
+    <h1>{{ startNumAndEndNum }}------------当前页面：{{ pageNo }}</h1>
   </div>
 </template>
   
-  <script>
+<script>
 export default {
   name: "Pagination",
+  props: ["pageNo", "pageSize", "total", "continues"],
+  computed: {
+    //计算总共多少页
+    totalPage() {
+      //向上取整
+      return Math.ceil(this.total / this.pageSize);
+    },
+    //计算连续的页码的起始页与结束页数字
+    startNumAndEndNum() {
+      const { pageNo, continues, totalPage } = this;
+      let start = 0;
+      let end = 0;
+      //连续页码数字至少5页 总页数没有连续页数多时
+      if (continues > totalPage) {
+        start = 1;
+        end = totalPage;
+      } else {
+        //正常现象 总页数大于连续页数
+        start = pageNo - parseInt(continues / 2);
+        end = pageNo + parseInt(continues / 2);
+        if (start < 1) {
+          start = 1;
+          end = continues;
+        }
+        if (end > totalPage) {
+          end = totalPage;
+          start = totalPage - continues + 1;
+        }
+      }
+      return { start, end };
+    },
+  },
 };
 </script>
   
-  <style lang="less" scoped>
+<style lang="less" scoped>
 .pagination {
   text-align: center;
   button {
@@ -56,5 +112,9 @@ export default {
       color: #fff;
     }
   }
+}
+
+.active{
+  background-color: skyblue;
 }
 </style>
