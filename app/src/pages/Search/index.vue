@@ -60,14 +60,16 @@
               </ul>
             </div>
           </div>
+          <!-- 销售商品列表 -->
           <div class="goods-list">
             <ul class="yui3-g">
               <li class="yui3-u-1-5" v-for="good in goodsList" :key="good.id">
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="good.defaultImg"
-                    /></a>
+                    <!-- 在路由跳转的时候切记别忘了带id(params参数) -->
+                    <router-link :to="`/detail/${good.id}`">
+                      <img :src="good.defaultImg"/> 
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -258,7 +260,6 @@ export default {
       this.searchParams.category1Id = "";
       this.searchParams.category2Id = "";
       this.searchParams.category3Id = "";
-      console.log(this.searchParams);
     },
   },
 };
