@@ -1,9 +1,9 @@
 <template>
   <div class="spec-preview">
-    <img src="../images/s1.png" />
+    <img :src="imgObj.imgUrl" />
     <div class="event"></div>
     <div class="big">
-      <img src="../images/s1.png" />
+      <img :src="imgObj.imgUrl" />
     </div>
     <div class="mask"></div>
   </div>
@@ -12,6 +12,23 @@
 <script>
   export default {
     name: "Zoom",
+    data(){
+      return{
+        currentIndex:0,
+      }
+    },
+    props:['skuImageList'],
+    computed:{
+      imgObj(){
+        return this.skuImageList[this.currentIndex] || {};
+      }
+    },
+    mounted(){
+      //全局事件总线获取兄弟组件传递过来的索引值
+      this.$bus.$on('getIndex',(index)=>{
+        this.currentIndex=index;
+      })
+    }
   }
 </script>
 

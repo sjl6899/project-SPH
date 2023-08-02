@@ -25,11 +25,17 @@ const actions={
 //计算属性，在项目中，为了简化仓库中数据而生
 //可以把我们将来在 组件中需要用的数据简化一下，【将来组件在获取数据的时候就比较方便】
 const getters={
+    //路径导航简化的数据
     categoryView(state){
         return state.goodInfo.categoryView || {};
     },
+    //简化产品信息的数据 
     skuInfo(state){
         return state.goodInfo.skuInfo || {};
+    },
+    //产品售卖属性的简化
+    spuSaleAttrList(state){
+        return state.goodInfo.spuSaleAttrList || [];
     }
 };
 
