@@ -84,7 +84,12 @@
                   :class="{ active: spuSaleAttrValue.isChecked == 1 }"
                   v-for="spuSaleAttrValue in spuSaleAttr.spuSaleAttrValueList"
                   :key="spuSaleAttrValue.id"
-                  @click="changeActive(spuSaleAttrValue,spuSaleAttr.spuSaleAttrValueList)"
+                  @click="
+                    changeActive(
+                      spuSaleAttrValue,
+                      spuSaleAttr.spuSaleAttrValueList
+                    )
+                  "
                 >
                   {{ spuSaleAttrValue.saleAttrValueName }}
                 </dd>
@@ -92,12 +97,23 @@
             </div>
             <div class="cartWrap">
               <div class="controls">
-                <input autocomplete="off" class="itxt" />
-                <a href="javascript:" class="plus">+</a>
-                <a href="javascript:" class="mins">-</a>
+                <input
+                  autocomplete="off"
+                  class="itxt"
+                  v-model="skuNum"
+                  @change="cahngeSkuNum"
+                />
+                <a href="javascript:" class="plus" @click="skuNum++">+</a>
+                <a
+                  href="javascript:"
+                  class="mins"
+                  @click="skuNum > 1 ? skuNum-- : (skuNum = 1)"
+                  >-</a
+                >
               </div>
               <div class="add">
-                <a href="javascript:">加入购物车</a>
+                <!-- 这里在加入购物车，进行路由跳转之前，发请求把你购买的产品信息通过请求形式通知服务器 服务器进行相应的存储 -->
+                <a @click="addShopcar">加入购物车</a>
               </div>
             </div>
           </div>
@@ -336,11 +352,17 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 import ImageList from "./ImageList/ImageList";
 import Zoom from "./Zoom/Zoom";
 export default {
   name: "Detail",
+  data() {
+    return {
+      //购买数量
+      skuNum: 1,
+    };
+  },
   components: {
     ImageList,
     Zoom,
@@ -356,16 +378,51 @@ export default {
       return this.skuInfo.skuImageList || [];
     },
   },
-  methods:{
+  methods: {
     //产品的售卖属性高亮
-    changeActive(saleAttrValue,arr){
+    changeActive(saleAttrValue, arr) {
       //遍历全部售卖属性isChecked为0 不显示高亮 （排他思想）
-      arr.forEach(item => {
-        item.isChecked='0';
+      arr.forEach((item) => {
+        item.isChecked = "0";
       });
-      saleAttrValue.isChecked='1';
-    }
-  }
+      saleAttrValue.isChecked = "1";
+    },
+    //表单元素改变
+    cahngeSkuNum(event) {
+      //用户输入的文本
+      let value = event.target.value * 1;
+      //如果用户输入进来的非法
+      if (isNaN(value) || value < 1) {
+        this.skuNum = 1;
+      } else {
+        this.skuNum = parseInt(value);
+      }
+    },
+    //加入购物车的回调函数
+    async addShopcar() {
+      //1：发请求--将产品加入到数据库（通知服务器）
+      /**
+       * 当前派发一个action 向服务器发请求判断加入购物车是否成功 进行相应的操作
+       * 以下代码：调用仓库中的addOrUpdateShopCart 加上了asyc 返回一定是个Promis 要么成功||失败
+       */
+      try {
+        await this.$store.dispatch("addOrUpdateShopCart", {
+          skuId: this.$route.params.skuid,
+          skuNum: this.skuNum,
+        });
+        //路由跳转
+        //产品数据【复杂】 通过会话存储（不持久化，会话结束数据会消失）
+        //本地存储|会话存储一般存储的是字符串
+        sessionStorage.setItem('SKUINFO',JSON.stringify(this.skuInfo));
+        this.$router.push({name:'addcartsuccess',query:{skuNum:this.skuNum}});
+      } catch (error) {
+        alert(error.message);
+      }
+
+      //2：服务器存储成功 路由跳转 并传参
+      //3:存储失败
+    },
+  },
 };
 </script>
 

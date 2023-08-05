@@ -14,20 +14,13 @@ export const reqGetBannerList = () => mockRequest({ url: '/banner', method: 'get
 export const reqFloorList = () => mockRequest({ url: '/floor', method: 'get' });
 
 //获取搜索模块数据 地址：/api/list 请求方式：post 参数：需要带参数
-/*
-{
-  "category3Id": "61",
-  "categoryName": "手机",
-  "keyword": "小米",
-  "order": "1:desc",
-  "pageNo": 1,
-  "pageSize": 10,
-  "props": ["1:1700-2799:价格", "2:6.65-6.74英寸:屏幕尺寸"],
-  "trademark": "4:小米"
-}
-*/
-
 export const reqGetSearchInfo = (params) => request({ url: 'http://gmall-h5-api.atguigu.cn/api/list', method: 'post', data: params });
 
-//获取产品信息的详情信息 URL:/api/item/{skuid} mehtod:get
-export const reqGoodsInfo = (skuid) => request({ url: `http://gmall-h5-api.atguigu.cn/api/item/${skuid}`, method: 'get' });
+//获取产品信息的详情信息 URL:/api/item/{skuId} mehtod:get
+export const reqGoodsInfo = (skuId) => request({ url: `http://gmall-h5-api.atguigu.cn/api/item/${skuId}`, method: 'get' });
+
+//将产品添加到购物车中 （获取更新某一产品的数量）
+export const reqAddOrUpdateShopCart = (skuId, skuNum) => request({ url: `http://gmall-h5-api.atguigu.cn/api/cart/addToCart/${skuId}/${skuNum}`, method: 'post' });
+
+//获取购物车列表数据接口 URL:/api/cart/cartList method:get
+export const reqCartList=()=>request({url:'http://gmall-h5-api.atguigu.cn/api/cart/cartList',method:'get'});

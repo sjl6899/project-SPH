@@ -38,7 +38,6 @@
     </button>
 
     <button style="margin-left: 30px">共 {{ total }} 条</button>
-    <h1>{{ startNumAndEndNum }}------------当前页面：{{ pageNo }}</h1>
   </div>
 </template>
   

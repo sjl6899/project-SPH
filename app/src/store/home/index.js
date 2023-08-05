@@ -28,7 +28,6 @@ const actions={
             //提交到mutations
             commit("CATEGORYLIST",result.data);
         }
-        console.log(result);
     },
     //获取首页轮播图的数据
     async getBannerList({commit}){
