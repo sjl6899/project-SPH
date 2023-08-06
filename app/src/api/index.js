@@ -24,3 +24,9 @@ export const reqAddOrUpdateShopCart = (skuId, skuNum) => request({ url: `http://
 
 //获取购物车列表数据接口 URL:/api/cart/cartList method:get
 export const reqCartList=()=>request({url:'http://gmall-h5-api.atguigu.cn/api/cart/cartList',method:'get'});
+
+//删除购物车产品的接口 URL:/api/cart/deleteCart/{skuId} method:DELETE
+export const reqDeleteCartById=(skuId)=>request({url:`http://gmall-h5-api.atguigu.cn/api/cart/deleteCart/${skuId}`,method:'delete'});
+
+//修改商品选中状态 url：/api/cart/checkCart/{skuID}/{isChecked} method:get
+export const reqUpdateCheckedByid=(skuId,isChecked)=>request({url:`http://gmall-h5-api.atguigu.cn/api/cart/checkCart/${skuId}/${isChecked}`,method:'get'});
