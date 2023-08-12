@@ -6,10 +6,14 @@
       <div class="container">
         <div class="loginList">
           <p>尚品汇欢迎您！</p>
-          <p>
+          <p v-if="!userName">
             <span>请</span>
             <router-link to="/login">登录</router-link>
             <router-link class="register" to="/register">免费注册</router-link>
+          </p>
+          <p v-else>
+            <a>{{ userName }}</a>
+            <a class="register" @click="logout">退出登录</a>
           </p>
         </div>
         <div class="typeList">
@@ -103,12 +107,31 @@ export default {
         this.$router.push(location);
       }
     },
+    //推出登录
+    async logout(){
+      //1.发请求 通知服务器 删除信息 token
+      //2.清楚项目当中的
+      try {
+        await this.$store.dispatch("userLogout");
+        this.$router.push('/home')
+      } catch (error) {
+        alert(error.message)
+      }
+    }
   },
   mounted(){
     //通过全局事件总线清除关键字
     this.$bus.$on("clear",()=>{
       this.keyword="";
-    })
+    }),
+    //获取用户信息在首页展示
+    this.$store.dispatch("getUserInfo");
+  },
+  computed:{
+    //用户名信息
+    userName(){
+      return this.$store.state.user.userInfo.name;
+    }
   }
 };
 </script>
