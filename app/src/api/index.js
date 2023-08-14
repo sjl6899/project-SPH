@@ -45,3 +45,9 @@ export const reqUserInfo=(data)=>request({url:'http://gmall-h5-api.atguigu.cn/ap
 
 //退出登录 url：/api/user/passport/logout
 export const reqLogout=(data)=>request({url:'http://gmall-h5-api.atguigu.cn/api/user/passport/logout',method:'get'});
+
+//获取用户地址信息 /api/user/userAddress/auth/findUserAddressList
+export const reqAddressInfo=()=>request({url:'http://gmall-h5-api.atguigu.cn/api/user/userAddress/auth/findUserAddressList',method:'get'});
+
+//获取交易页订单信息 /api/order/auth/trade
+export const reqOrdeInfo=()=>request({url:'http://gmall-h5-api.atguigu.cn/api/order/auth/trade',method:'get'});
