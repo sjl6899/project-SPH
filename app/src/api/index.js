@@ -51,3 +51,9 @@ export const reqAddressInfo=()=>request({url:'http://gmall-h5-api.atguigu.cn/api
 
 //获取交易页订单信息 /api/order/auth/trade
 export const reqOrdeInfo=()=>request({url:'http://gmall-h5-api.atguigu.cn/api/order/auth/trade',method:'get'});
+
+//提交订单接口 url：/api/order/auth/submitOrder?tradeNo={tradeNo} method：post
+export const reqSubmitOrder=(tradeNo,data)=>request({url:`http://gmall-h5-api.atguigu.cn/api/order/auth/submitOrder?tradeNo=${tradeNo}`,data,method:'post'});
+
+//根据订单编号 获取订单支付信息 url:/api/payment/weixin/createNative/{orderId} method:get
+export const reqPayInfo=(orderId)=>request({url:`http://gmall-h5-api.atguigu.cn/api/payment/weixin/createNative/${orderId}`,method:'get'});
