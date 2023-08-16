@@ -57,3 +57,7 @@ export const reqSubmitOrder=(tradeNo,data)=>request({url:`http://gmall-h5-api.at
 
 //根据订单编号 获取订单支付信息 url:/api/payment/weixin/createNative/{orderId} method:get
 export const reqPayInfo=(orderId)=>request({url:`http://gmall-h5-api.atguigu.cn/api/payment/weixin/createNative/${orderId}`,method:'get'});
+
+//获取支付订单状况 url:/api/payment/weixin/queryPayStatus/{orderId}
+export const reqPayStatus=(orderId)=>request({url:`http://gmall-h5-api.atguigu.cn/api/payment/weixin/queryPayStatus/${orderId}`,method:'get'});
+

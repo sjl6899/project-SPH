@@ -10,68 +10,85 @@ import Trade from '@/pages/Trade'
 import Pay from '@/pages/Pay'
 import PaySuccess from '@/pages/PaySuccess'
 import Center from '@/pages/Center'
+//引入二级路由
+import MyOrder from '@/pages/Center/myOrder'
+import GroupOrder from '@/pages/Center/groupOrder'
 // 对外暴露路由信息
 export default [
     {
-        path:"/center",
-        component:Center,
-        meta: { show:true }
+        path: "/center",
+        component: Center,
+        meta: { show: true },
+        children: [
+            {
+                path: 'myorder',
+                component: MyOrder,
+            },
+            {
+                path: 'grouporder',
+                component: GroupOrder,
+            },
+            {
+                path:'/center',
+                redirect:'/center/myorder'
+            }
+        ]
     },
     {
-        path:"/paySuccess",
-        component:PaySuccess,
-        meta: { show:true }
+        path: "/paysuccess",
+        component: PaySuccess,
+        meta: { show: true }
     },
     {
-        path:"/pay",
-        component:Pay,
-        meta: { show:true }
+        path: "/pay",
+        component: Pay,
+        meta: { show: true }
     },
     {
-        path:"/trade",
-        component:Trade,
-        meta: { show:true }
+        path: "/trade",
+        component: Trade,
+        meta: { show: true }
     },
     {
-        path:"/shopcart",
-        component:ShopCart,
-        meta: { show:true }
+        path: "/shopcart",
+        component: ShopCart,
+        meta: { show: true }
     },
     {
-        path:"/addcartsuccess",
-        name:'addcartsuccess',
-        component:AddCartSuccess,
-        meta: { show:true }
+        path: "/addcartsuccess",
+        name: 'addcartsuccess',
+        component: AddCartSuccess,
+        meta: { show: true }
     },
     {
-        path:"/detail/:skuid",
-        component:Detail,
-        meta: { show:true }
+        path: "/detail/:skuid",
+        component: Detail,
+        meta: { show: true }
     },
     {
-        path:"/home",
+        path: "/home",
         component: Home,
-        meta: { show:true }
+        meta: { show: true }
     },
     {
-        path:"/register",
+        path: "/register",
         component: Register,
-        meta: { show:false }
+        meta: { show: false }
     },
     {
-        path:"/search/:keyword?",
+        path: "/search/:keyword?",
         component: Search,
-        meta: { show:true },
-        name:"search"
+        meta: { show: true },
+        name: "search"
     },
     {
-        path:"/login",
+        path: "/login",
         component: Login,
-        meta: { show:false}
+        meta: { show: false }
     },
     //重定向
     {
-        path:"*",
+        path: "*",
         redirect: "/home"
     }
 ]
