@@ -61,3 +61,5 @@ export const reqPayInfo=(orderId)=>request({url:`http://gmall-h5-api.atguigu.cn/
 //获取支付订单状况 url:/api/payment/weixin/queryPayStatus/{orderId}
 export const reqPayStatus=(orderId)=>request({url:`http://gmall-h5-api.atguigu.cn/api/payment/weixin/queryPayStatus/${orderId}`,method:'get'});
 
+//获取个人中心数据 url:/api/order/auth/{page}/{limit}
+export const reqMyOrderList=(page,limit)=>request({url:`http://gmall-h5-api.atguigu.cn/api/order/auth/${page}/${limit}`,method:'get'});

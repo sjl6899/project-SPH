@@ -74,8 +74,14 @@ router.beforeEach(async (to, from, next) => {
             }
         }
     } else {
-        //未登录 暂时没有处理完毕 先这个样子后期再处理
-        next();
+        //未登录 不能去交易相关【pay|paysuccess】，个人中心
+        let toPath=to.path;
+        if (toPath.indexOf('/trade')!=-1 || toPath.indexOf('/pay')!=-1 || toPath.indexOf('/center')!=-1) {
+            next('/login?redirect='+toPath);
+        } else {
+            next();
+        }
+
     }
 })
 
