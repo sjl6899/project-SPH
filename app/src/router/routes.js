@@ -42,12 +42,32 @@ export default [
     {
         path: "/pay",
         component: Pay,
-        meta: { show: true }
+        meta: { show: true },
+        //路由独享
+        beforeEnter:(to,from,next)=>{
+            //去交易页面 必须从购物车来
+            if(from.path=="/trade"){
+                next();
+            }else{
+                //其他的路由组件而来，停留在当前页面
+                next(false);
+            }
+        }
     },
     {
         path: "/trade",
         component: Trade,
-        meta: { show: true }
+        meta: { show: true },
+        //路由独享
+        beforeEnter:(to,from,next)=>{
+            //去交易页面 必须从购物车来
+            if(from.path=="/shopcart"){
+                next();
+            }else{
+                //其他的路由组件而来，停留在当前页面
+                next(false);
+            }
+        }
     },
     {
         path: "/shopcart",
