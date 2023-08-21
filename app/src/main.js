@@ -38,6 +38,9 @@ Vue.use(VueLazyload, {
   //懒加载默认图片
   loading: fr,
 })
+
+//引入表单校验插件VeeValidate
+import "@/plugins/validate.js"
 new Vue({
   render: h => h(App),
   //全局事件总线4bus配置
